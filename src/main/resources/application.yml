@@ -1,1 +1,40 @@
+server:
+  port: 8080
+  context-path: /s/     #名字前面一定要加/ 不然启动会报错
+  tomcat:
+    basedir: targer/tomcat
+    accesslog:
+      enabled: true
 
+#数据库配置
+spring:
+  datasource:
+    name: test
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.jdbc.Driver
+      #基本属性
+      url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf-8
+      username: root
+      password: 123456
+  redis:
+    database: 1
+    host: 127.0.0.1
+    port: 6379
+    password:
+    pool:
+      max-active: 0
+      max-wait: -1
+      min-idle: 0
+    timeout: 20000
+# mybatis 配置
+mybatis:
+  mapperLocations: classpath:com/mybatis/mapper/*.xml
+  typeAliasesPackage: com.mybatis.model
+
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    root: INFO
+    org:
+      mybatis: INFO
