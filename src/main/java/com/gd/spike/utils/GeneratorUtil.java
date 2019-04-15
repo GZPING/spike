@@ -91,14 +91,14 @@ public class GeneratorUtil {
             }
         });
 
-        cfg.setFileCreate(new IFileCreate() {
+      /*  cfg.setFileCreate(new IFileCreate() {
             @Override
             public boolean isCreate(ConfigBuilder configBuilder, FileType fileType, String filePath) {
                 // 判断自定义文件夹是否需要创建
-                checkDir("调用默认方法创建的目录");
+               checkDir("com.gd");
                 return false;
             }
-        });
+        });*/
 
        cfg.setFileOutConfigList(focList);
         mpg.setCfg(cfg);
@@ -119,12 +119,12 @@ public class GeneratorUtil {
         StrategyConfig strategy = new StrategyConfig();
         strategy.setNaming(NamingStrategy.underline_to_camel);
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
-        strategy.setSuperEntityClass("com.gd.spike.BaseEntity");
+       // strategy.setSuperEntityClass("com.gd.spike.BaseEntity");
         strategy.setEntityLombokModel(true);
         strategy.setRestControllerStyle(true);
-        strategy.setSuperControllerClass("com.gd.spike.BaseController");
+        //strategy.setSuperControllerClass("com.gd.spike.BaseController");
         strategy.setInclude(scanner("表名，多个英文逗号分割").split(","));
-        strategy.setSuperEntityColumns("id");
+       // strategy.setSuperEntityColumns("id");
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix(pc.getModuleName() + "_");
         mpg.setStrategy(strategy);
