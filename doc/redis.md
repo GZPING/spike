@@ -153,6 +153,11 @@ OBJECT 命令允许从内部察看给定 key 的 Redis 对象。
 >迭代哈希表中的键值对。
 
 ## List
+> l 为左，r 为右 \
+push 则添加，pop 取出并删除 \
+先进为表头，后进为表尾
+
+
 1. BLPOP key1 [key2 ] timeout 
 >移出并获取列表的第一个元素， 如果列表没有元素会阻塞列表直到等待超时或发现可弹出元素为止。
 2. BRPOP key1 [key2 ] timeout 
@@ -162,7 +167,7 @@ OBJECT 命令允许从内部察看给定 key 的 Redis 对象。
 4. LINDEX key index 
 >通过索引获取列表中的元素
 5. LINSERT key BEFORE|AFTER pivot value 
->在列表的元素前或者后插入元素
+>在列表的元素前或者后插入元素   linsert list before '1' '0' 执行错误
 6. LLEN key 
 >获取列表长度
 7. LPOP key 
@@ -175,10 +180,17 @@ OBJECT 命令允许从内部察看给定 key 的 Redis 对象。
 >获取列表指定范围内的元素
 11. LREM key count value 
 >移除列表元素
+count > 0 : 从表头开始向表尾搜索，移除与 value 相等的元素，数量为 count 。\
+count < 0 : 从表尾开始向表头搜索，移除与 value 相等的元素，数量为 count 的绝对值。\
+count = 0 : 移除表中所有与 value 相等的值。\
 12. LSET key index value 
 >通过索引设置列表元素的值
 13. LTRIM key start stop 
 >对一个列表进行修剪(trim)，就是说，让列表只保留指定区间内的元素，不在指定区间之内的元素都将被删除。
+情况 1： 常见情况， start 和 stop 都在列表的索引范围之内    （范围删除）\
+情况 2： stop 比列表的最大下标还要大 (不在范围内的被删除) \
+情况 3： start 和 stop 都比列表的最大下标要大，并且 start < stop （全删除）\
+情况 4： start 和 stop 都比列表的最大下标要大，并且 start > stop （全删除）\
 14. RPOP key 
 >移除列表的最后一个元素，返回值为移除的元素。
 15. RPOPLPUSH source destination 
