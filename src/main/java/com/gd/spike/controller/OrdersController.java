@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrdersController {
 
     public ResultBean<String> test(){
+        System.out.println(this);
         return new ResultBean<>("ok");
     }
 }
