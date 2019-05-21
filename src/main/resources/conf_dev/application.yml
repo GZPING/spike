@@ -51,7 +51,13 @@ spring:
         url-pattern: /*
         # 忽略过滤格式
         exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
-
+  rabbitmq:
+    host: 192.168.128.130
+    port: 5672
+    username: gd
+    password: gd
+    virtual-host: /
+    publisher-confirms: true
 # mybatis
 mybatis:
   mapperLocations: classpath:mapper/spike/*.xml
